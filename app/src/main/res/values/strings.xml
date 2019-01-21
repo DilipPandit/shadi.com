@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Shadi.com</string>
+    <string name="please_wait">please wait...</string>
+    <string-array name="SideMenu">
+        <item>My Account</item>
+        <item>Offers</item>
+        <item>My Order</item>
+        <item>Logout</item>
+    </string-array>
+    <string name="work_in_progress">Work in Progress</string>
+    <string name="no_internet">Please check your connectivity...</string>
+    <string name="something_wrong">Something went wrong!!!</string>
+    <string name="decline">Decline</string>
+    <string name="connect">Connect</string>
+</resources>
