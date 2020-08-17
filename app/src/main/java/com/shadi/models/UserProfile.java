@@ -2,7 +2,20 @@ package com.shadi.models;
 
 import java.io.Serializable;
 
-public class UserProfile implements Serializable {
+import io.realm.RealmObject;
+
+public class UserProfile extends RealmObject implements Serializable {
+
+    String userStatus="NA";
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
     String gender;
 
     public String getGender() {
@@ -47,7 +60,7 @@ public class UserProfile implements Serializable {
 
     name name;
 
-    public class name {
+    public class name  extends RealmObject{
         String title;
         String first;
         String last;
@@ -79,17 +92,37 @@ public class UserProfile implements Serializable {
 
     location location;
 
-    public class location {
-        String street;
+    public class street  extends RealmObject{
+        int number;
+        String name;
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+    public class location  extends RealmObject{
+        street street;
         String city;
         String state;
         String postcode;
 
-        public String getStreet() {
+        public UserProfile.street getStreet() {
             return street;
         }
 
-        public void setStreet(String street) {
+        public void setStreet(UserProfile.street street) {
             this.street = street;
         }
 
@@ -119,7 +152,7 @@ public class UserProfile implements Serializable {
 
         coordinates coordinates;
 
-        public class coordinates {
+        public class coordinates  extends RealmObject{
             String latitude;
             String longitude;
 
@@ -158,7 +191,7 @@ public class UserProfile implements Serializable {
             this.timezone = timezone;
         }
 
-        public class timezone {
+        public class timezone  extends RealmObject{
             String offset;
             String description;
 
@@ -188,7 +221,7 @@ public class UserProfile implements Serializable {
     String email;
     login login;
 
-    public class login {
+    public class login  extends RealmObject{
         String uuid;
         String username;
         String password;
@@ -256,7 +289,7 @@ public class UserProfile implements Serializable {
 
     dob dob;
 
-    public class dob {
+    public class dob  extends RealmObject{
         String date;
         String age;
 
@@ -279,7 +312,7 @@ public class UserProfile implements Serializable {
 
     registered registered;
 
-    public class registered {
+    public class registered  extends RealmObject{
         String date;
         String age;
 
@@ -296,7 +329,7 @@ public class UserProfile implements Serializable {
     String cell;
     id id;
 
-    public class id {
+    public class id  extends RealmObject{
         String name;
         String value;
 
@@ -375,7 +408,7 @@ public class UserProfile implements Serializable {
         this.picture = picture;
     }
 
-    public class picture {
+    public class picture  extends RealmObject{
         String large;
         String medium;
         String thumbnail;

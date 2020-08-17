@@ -12,4 +12,6 @@
     <string name="something_wrong">Something went wrong!!!</string>
     <string name="decline">Decline</string>
     <string name="connect">Connect</string>
+    <string name="user_select">Member accepted your request</string>
+    <string name="user_decline">Member decline your request</string>
 </resources>

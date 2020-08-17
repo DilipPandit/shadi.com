@@ -8,7 +8,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.shadi.BuildConfig;
 import com.shadi.networking.NetworkImageCache;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class AppController extends Application {
     public static final String TAG = AppController.class
@@ -23,6 +27,9 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name(BuildConfig.APPLICATION_ID).build();
+        Realm.setDefaultConfiguration(config);
     }
 
     public static synchronized AppController getInstance() {

@@ -43,11 +43,23 @@
                 android:maxLines="3"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/size_16" />
-
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Member accesspted your request"
+                android:layout_marginLeft="@dimen/size_24"
+                android:layout_marginRight="@dimen/size_24"
+                android:gravity="center_horizontal"
+                android:maxLines="3"
+                android:textSize="@dimen/size_16" />
             <LinearLayout
+                android:id="@+id/llOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="@dimen/padding_5"
                 android:weightSum="2">
 
                 <LinearLayout
@@ -62,7 +74,7 @@
                         android:id="@+id/ivDecline"
                         android:layout_width="@dimen/image_size"
                         android:layout_height="@dimen/image_size"
-                        android:src="@drawable/ic_cancel" />
+                        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
                     <TextView
                         android:id="@+id/tvDecline"

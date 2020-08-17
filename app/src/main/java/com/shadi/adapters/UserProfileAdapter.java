@@ -1,5 +1,6 @@
 package com.shadi.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -35,24 +37,30 @@ public class UserProfileAdapter extends RecyclerView.Adapter<UserProfileAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final UserHolder userHolder, final int position) {
+    public void onBindViewHolder(final UserHolder userHolder, @SuppressLint("RecyclerView") final int position) {
         Glide.with(context)
                 .load(profileArrayList.get(position).getPicture().getLarge())
                 .error(R.drawable.ic_launcher_background)
                 .into(userHolder.ivProfile);
 
         userHolder.tvUserName.setText(profileArrayList.get(position).getName().getTitle() + "." + profileArrayList.get(position).getName().getFirst() + " " + profileArrayList.get(position).getName().getLast());
-        userHolder.tvDetails.setText(profileArrayList.get(position).getDob().getAge() + " " + profileArrayList.get(position).getLocation().toString());
+        userHolder.tvDetails.setText(profileArrayList.get(position).getDob().getAge() + " " + profileArrayList.get(position).getLocation().getStreet().getName() + "," + profileArrayList.get(position).getLocation().getStreet().getNumber());
         userHolder.ivDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 userHolder.tvDecline.performClick();
             }
         });
+
         userHolder.ivConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userConnectListner.isConnect(true, position, userHolder.cardView);
+                userConnectListner.isConnect(true, position);
+                userHolder.llOption.setVisibility(View.GONE);
+                userHolder.tvMessage.setVisibility(View.VISIBLE);
+                userHolder.tvMessage.setText(context.getString(R.string.user_select));
+                profileArrayList.get(position).setUserStatus(context.getString(R.string.connect));
+
             }
         });
         userHolder.tvConnect.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +72,21 @@ public class UserProfileAdapter extends RecyclerView.Adapter<UserProfileAdapter.
         userHolder.tvDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userConnectListner.isConnect(false, position, userHolder.cardView);
+                userConnectListner.isConnect(false, position);
+                userHolder.llOption.setVisibility(View.GONE);
+                userHolder.tvMessage.setVisibility(View.VISIBLE);
+                userHolder.tvMessage.setText(context.getString(R.string.user_decline));
+                profileArrayList.get(position).setUserStatus(context.getString(R.string.decline));
             }
         });
+        if (profileArrayList.get(position).getUserStatus().equalsIgnoreCase("NA")) {
+
+            userHolder.llOption.setVisibility(View.VISIBLE);
+            userHolder.tvMessage.setVisibility(View.GONE);
+        } else if (profileArrayList.get(position).getUserStatus().equalsIgnoreCase(context.getString(R.string.connect)))
+            profileArrayList.get(position).setUserStatus(context.getString(R.string.connect));
+        else if (profileArrayList.get(position).getUserStatus().equalsIgnoreCase(context.getString(R.string.decline)))
+            profileArrayList.get(position).setUserStatus(context.getString(R.string.decline));
     }
 
     @Override
@@ -76,8 +96,9 @@ public class UserProfileAdapter extends RecyclerView.Adapter<UserProfileAdapter.
 
     public class UserHolder extends RecyclerView.ViewHolder {
         ImageView ivProfile, ivDecline, ivConnect;
-        TextView tvUserName, tvDetails, tvDecline, tvConnect;
+        TextView tvUserName, tvDetails, tvDecline, tvConnect, tvMessage;
         CardView cardView;
+        LinearLayout llOption;
 
         public UserHolder(View itemView) {
             super(itemView);
@@ -89,6 +110,8 @@ public class UserProfileAdapter extends RecyclerView.Adapter<UserProfileAdapter.
             tvDecline = itemView.findViewById(R.id.tvDecline);
             tvConnect = itemView.findViewById(R.id.tvConnect);
             cardView = itemView.findViewById(R.id.cardView);
+            llOption = itemView.findViewById(R.id.llOption);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
         }
     }
 }

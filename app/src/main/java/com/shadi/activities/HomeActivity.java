@@ -76,65 +76,13 @@ public class HomeActivity extends BaseActivity implements UserConnectListner, Ne
     }
 
     @Override
-    public void isConnect(boolean isConnect, final int position, final View view) {
+    public void isConnect(boolean isConnect, final int position) {
 
         if (isConnect) {
-            userSelected(position, view);
+
         } else {
-            userDeclined(position, view);
         }
 
     }
 
-    private void userDeclined(final int position, final View view) {
-        YoYo.with(Techniques.SlideOutLeft).withListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                userProfileArrayList.remove(position);
-                view.setVisibility(View.GONE);
-                userProfileAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        }).duration(600).playOn(view);
-    }
-
-    private void userSelected(final int position, final View view) {
-        YoYo.with(Techniques.SlideOutRight).withListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                userProfileArrayList.remove(position);
-                view.setVisibility(View.GONE);
-                userProfileAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        }).duration(600).playOn(view);
-    }
 }
